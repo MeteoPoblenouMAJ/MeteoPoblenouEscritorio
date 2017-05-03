@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="Style" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="851.0" prefWidth="1562.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="590.0" styleClass="root" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<children>
+        <MenuBar prefHeight="34.0" prefWidth="940.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Dia de hoy">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#UltimosDatos" text="Ultimos Datos Recogidos" />
+                        <MenuItem mnemonicParsing="false" text="Resumen Diario" />
+                        <MenuItem mnemonicParsing="false" text="Tiempo Actual" />
+                    </items>
+                </Menu>
+            <Menu mnemonicParsing="false" text="Resumen Semana">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Observar Grafica" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Tiempo en Directo">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Ver cam" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Observar Graficas">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Mirar Grafica del dia anterior" />
+                <MenuItem mnemonicParsing="false" text="Mirar Grafica de la semana pasada" />
+                  <MenuItem mnemonicParsing="false" text="Mirar Grafica del mes pasado" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ayuda">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Sobre MeteoPoblenou" />
+                  <MenuItem mnemonicParsing="false" text="Apartado Dia de Hoy" />
+                  <MenuItem mnemonicParsing="false" text="Apartado Resumen Semana" />
+                  <MenuItem mnemonicParsing="false" text="Apartado Tiempo en Directo" />
+                  <MenuItem mnemonicParsing="false" text="Apartado Observar Graficas" />
+              </items>
+            </Menu>
+            </menus>
+        </MenuBar>
+    </children>
+</AnchorPane>
