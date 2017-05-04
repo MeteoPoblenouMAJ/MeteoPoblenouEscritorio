@@ -4,8 +4,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="590.0" styleClass="root" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="909.0" styleClass="root" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 <children>
         <MenuBar prefHeight="34.0" prefWidth="940.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
@@ -44,5 +45,10 @@
             </Menu>
             </menus>
         </MenuBar>
+    <Text fx:id="campoTexto1" fill="white" layoutX="314.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto2" fill="white" layoutX="314.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto3" fill="white" layoutX="314.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto4" fill="white" layoutX="314.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto5" fill="white" layoutX="314.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="262.999999165535" />
     </children>
 </AnchorPane>
