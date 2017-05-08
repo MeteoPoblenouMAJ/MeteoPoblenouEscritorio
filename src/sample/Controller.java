@@ -20,7 +20,7 @@ public class Controller {
     }
 
     //Meotodo que mostrara los ultimos datos recogidos
-    
+
     public void UltimosDatos(ActionEvent actionEvent){
 
         campoTexto1.setText("Temperatura Raspberry: ");
@@ -35,6 +35,9 @@ public class Controller {
         campoTexto3.setVisible(true);
         campoTexto4.setVisible(true);
         campoTexto5.setVisible(true);
+
+
+
     }
 
 }
