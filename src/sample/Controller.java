@@ -1,7 +1,12 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
+
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -12,10 +17,36 @@ public class Controller {
     public Text campoTexto3;
     public Text campoTexto4;
     public Text campoTexto5;
+    public ListView<Temp> lvLlistaCartes;
 
 
     //Lo que hara al inicarse
     public void initialize() {
+
+        ApiTemps apicart = new ApiTemps();
+        ArrayList<Temp> listacartas = apicart.getCardsTypes();
+
+        lvLlistaCartes.setCellFactory(new Callback<ListView<Temp>, ListCell<Temp>>() {
+            @Override
+            public ListCell<Temp> call(ListView<Temp> p) {
+
+                ListCell<Temp> cell = new ListCell<Temp>() {
+
+                    @Override
+                    protected void updateItem(Temp t, boolean bln) {
+                        super.updateItem(t, bln);
+                        if (t != null) {
+                            /*String titulo="Nombre: "+t.getNombre();
+                            String rareza="rareza: "+t.getRareza();
+                            String color="color: "+t.getColor();
+                            String texto=titulo+"\n"+rareza+"\n"+color;
+                            setText(texto);*/
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
 
     }
 
