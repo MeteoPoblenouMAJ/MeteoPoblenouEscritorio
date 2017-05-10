@@ -76,28 +76,60 @@ public class Controller {
         campoTexto4.setVisible(true);
         campoTexto5.setVisible(true);
 
-        if(imagen.equals("03d")||imagen.equals("02d")){
+        if(imagen.equals("03d")||imagen.equals("03n")){
             nublado();
         }
-        if(imagen.equals("01d")||imagen.equals("1n")){
+        if(imagen.equals("01d")){
             soleado();
         }
-        if(imagen.equals("04d")||imagen.equals("09d")||imagen.equals("04n")||imagen.equals("09n")){
+        if(imagen.equals("01n")){
+           luna();
+        }
+        if(imagen.equals("04n")||imagen.equals("02n")){
+            lunanube();
+        }
+        if(imagen.equals("04d")||imagen.equals("02d")){
             parsoleado();
         }
         if(imagen.equals("13d")||imagen.equals("13n")){
             snow();
         }
+        if(imagen.equals("10d")||imagen.equals("09d")||imagen.equals("09n")||imagen.equals("10n")){
+            lluvia();
+        }
+        if(imagen.equals("11d")||imagen.equals("11n")){
+            tormenta();
+        }
 
     }
 
+    private void lunanube() {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/nubeluna.png")));
+        ImagenTiempo.setImage(image);
+    }
+
+    private void luna() {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/Luna.png")));
+        ImagenTiempo.setImage(image);
+    }
+
+    private void tormenta() {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/rayos.png")));
+        ImagenTiempo.setImage(image);
+    }
+
+    private void lluvia() {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/lluvia.png")));
+        ImagenTiempo.setImage(image);
+    }
+
     private void snow() {
-        Image image = new Image((getClass().getResourceAsStream("Imagen/snow")));
+        Image image = new Image((getClass().getResourceAsStream("Imagen/snow.png")));
         ImagenTiempo.setImage(image);
     }
 
     private void parsoleado() {
-        Image image = new Image((getClass().getResourceAsStream("Imagen/parsol")));
+        Image image = new Image((getClass().getResourceAsStream("Imagen/parsol.png")));
         ImagenTiempo.setImage(image);
     }
 
