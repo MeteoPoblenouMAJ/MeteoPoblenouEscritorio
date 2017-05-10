@@ -5,7 +5,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by 53638138e on 09/05/17.
@@ -17,45 +16,62 @@ public class ApiTemps {
     public ApiTemps() {
     }
 
-    private static String url = "https://api.magicthegathering.io/v1/cards?";
+    private static String url = "http://api.openweathermap.org/data/2.5/weather?APPID=89e1966d38650a9ab9a6bc73dd8e6c84&lat=41.396620&lon=2.200817&units=metric";
+    private static Temp temp = new Temp();
+    static String JsonResponse = null;
 
-    public ArrayList<Temp> getCardsTypes() {
-        ArrayList<Temp> cards = new ArrayList<>();
+    public static Temp getCardsTypes() {
+
         try {
-            String JsonResponse = HtttpUtils.get(url);
+            JsonResponse= HtttpUtils.get(url);
             JSONObject data = new JSONObject(JsonResponse);
-            JSONArray jsonCartas = data.getJSONArray("main");
-            JSONArray jsonweather = data.getJSONArray("main");
             JSONObject object;
-            Temp temp = new Temp();
 
             //parte main
-            for (int i = 0; i <jsonCartas.length() ; i++) {
-
-                object = jsonCartas.getJSONObject(i);
-                    temp.setTemperatura(object.getString("temp"));
-
+                object = data.getJSONObject("main");
+                    int tempe =(object.getInt("temp"));
+                    temp.setTemperatura(String.valueOf(tempe));
                 if (object.has("humidity")) {
-                    temp.setHumedad(object.getString("humidity"));
+                    int hum =(object.getInt("humidity"));
+                    temp.setHumedad(String.valueOf(hum));
                 }
 
                 if (object.has("pressure")) {
-                    temp.setHumedad(object.getString("pressure"));
+                    int pres = (object.getInt("pressure"));
+                    temp.setPresion(String.valueOf(pres));
                 }
-            }
 
-            for (int i = 0; i <jsonweather.length() ; i++) {
-                object = jsonweather.getJSONObject(i);
-                temp.setTemperatura(object.getString("description"));
-            }
-
-
-            cards.add(temp);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return cards;
+        return temp;
     }
+
+    public static Temp getWeather() {
+        try {
+            JsonResponse = HtttpUtils.get(url);
+            JSONObject data = null;
+            data = new JSONObject(JsonResponse);
+            JSONArray jsonweather = data.getJSONArray("weather");
+            JSONObject object;
+
+           //Parte weather
+            for (int i = 0; i <jsonweather.length() ; i++) {
+                object = jsonweather.getJSONObject(i);
+                    temp.setDescripcion(object.getString("description"));
+                temp.setImage(object.getString("icon"));
+                System.out.println(temp.getImage());
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return temp;
+    }
+
 }

@@ -1,64 +1,73 @@
 package sample;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class Controller {
 
     // Campos que actualizaremos en cada sección
 
+    @FXML
     public Text campoTexto1;
     public Text campoTexto2;
     public Text campoTexto3;
     public Text campoTexto4;
     public Text campoTexto5;
-    public ListView<Temp> lvLlistaCartes;
+    public ImageView ImagenTiempo;
+
+
+
+
+    //Variables a rellenar
+    String temp;
+    String hume;
+    String pre;
+    String tiempo;
+    String imagen;
 
 
     //Lo que hara al inicarse
     public void initialize() {
 
-        ApiTemps apicart = new ApiTemps();
-        ArrayList<Temp> listacartas = apicart.getCardsTypes();
+        Temp t = ApiTemps.getCardsTypes();
+        Temp s = ApiTemps.getWeather();
 
-        lvLlistaCartes.setCellFactory(new Callback<ListView<Temp>, ListCell<Temp>>() {
-            @Override
-            public ListCell<Temp> call(ListView<Temp> p) {
 
-                ListCell<Temp> cell = new ListCell<Temp>() {
-
-                    @Override
-                    protected void updateItem(Temp t, boolean bln) {
-                        super.updateItem(t, bln);
-                        if (t != null) {
-                            /*String titulo="Nombre: "+t.getNombre();
-                            String rareza="rareza: "+t.getRareza();
-                            String color="color: "+t.getColor();
-                            String texto=titulo+"\n"+rareza+"\n"+color;
-                            setText(texto);*/
+        if (t != null) {
+            temp = "Temperatura: " + t.getTemperatura();
+            hume = "Humedad: " + t.getHumedad();
+            pre = "Presión: "+ t.getPresion();
+            tiempo = "Tiempo: "+ s.getDescripcion();
+            imagen = s.getImage();
                         }
-                    }
-                };
-                return cell;
-            }
-        });
+
+        try {
+            UltDatos();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     //Meotodo que mostrara los ultimos datos recogidos
 
     public void UltimosDatos(ActionEvent actionEvent){
+        initialize();
+    }
 
-        campoTexto1.setText("Temperatura Raspberry: ");
-        campoTexto2.setText("Humedad: ");
-        campoTexto3.setText("Presión: ");
-        campoTexto4.setText("Tiempo: ");
-        campoTexto5.setText("Temperatura Api: ");
+
+    public void UltDatos() throws IOException {
+
+        campoTexto1.setText("Temperatura Raspberry: " +"......");
+        campoTexto2.setText(hume);
+        campoTexto3.setText(pre);
+        campoTexto4.setText(tiempo);
+        campoTexto5.setText("Temperatura Api: "+temp);
 
         //Muetro los textos
         campoTexto1.setVisible(true);
@@ -67,8 +76,40 @@ public class Controller {
         campoTexto4.setVisible(true);
         campoTexto5.setVisible(true);
 
-
+        if(imagen.equals("03d")||imagen.equals("02d")){
+            nublado();
+        }
+        if(imagen.equals("01d")||imagen.equals("1n")){
+            soleado();
+        }
+        if(imagen.equals("04d")||imagen.equals("09d")||imagen.equals("04n")||imagen.equals("09n")){
+            parsoleado();
+        }
+        if(imagen.equals("13d")||imagen.equals("13n")){
+            snow();
+        }
 
     }
+
+    private void snow() {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/snow")));
+        ImagenTiempo.setImage(image);
+    }
+
+    private void parsoleado() {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/parsol")));
+        ImagenTiempo.setImage(image);
+    }
+
+    public void nublado() throws IOException {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/4-cloud-png-image-thumb.png")));
+        ImagenTiempo.setImage(image);
+    }
+
+    public void soleado() throws IOException {
+        Image image = new Image((getClass().getResourceAsStream("Imagen/sol.png")));
+        ImagenTiempo.setImage(image);
+    }
+
 
 }

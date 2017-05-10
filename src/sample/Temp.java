@@ -12,16 +12,19 @@ public class Temp implements Serializable {
     private String humedad;
     private String presion;
     private String descripcion;
+    private String Image;
+
 
 
     //Constructor
 
 
-    public Temp(String temperatura, String humedad, String presion, String descripcion) {
+    public Temp(String temperatura, String humedad, String presion, String descripcion, String image) {
         this.temperatura = temperatura;
         this.humedad = humedad;
         this.presion = presion;
         this.descripcion = descripcion;
+        Image = image;
     }
 
     public Temp() {
@@ -29,7 +32,7 @@ public class Temp implements Serializable {
 
 
     //Getters
-    public String getTemperatura(String temp) {
+    public String getTemperatura() {
         return temperatura;
     }
 
@@ -43,6 +46,10 @@ public class Temp implements Serializable {
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public String getImage() {
+        return Image;
     }
 
     //Setters
@@ -60,5 +67,9 @@ public class Temp implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public void setImage(String image) {
+        Image = image;
     }
 }

@@ -13,9 +13,8 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Dia de hoy">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#UltimosDatos" text="Ultimos Datos Recogidos" />
+                        <MenuItem mnemonicParsing="false" onAction="#UltimosDatos" text="Tiempo Actual" />
                         <MenuItem mnemonicParsing="false" text="Resumen Diario" />
-                        <MenuItem mnemonicParsing="false" text="Tiempo Actual" />
                     </items>
                 </Menu>
             <Menu mnemonicParsing="false" text="Resumen Semana">
@@ -46,11 +45,11 @@
             </Menu>
             </menus>
         </MenuBar>
-    <Text fx:id="campoTexto1" fill="white" layoutX="333.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura" textAlignment="CENTER" wrappingWidth="262.9999937862158" />
-    <Text fx:id="campoTexto2" fill="white" layoutX="333.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Humedad" textAlignment="CENTER" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto3" fill="white" layoutX="333.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presion" textAlignment="CENTER" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto4" fill="white" layoutX="333.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo" textAlignment="CENTER" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto5" fill="white" layoutX="333.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura Api" textAlignment="CENTER" wrappingWidth="262.999999165535" />
-      <ImageView fitHeight="146.0" fitWidth="195.0" layoutX="333.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" />
+    <Text fx:id="campoTexto1" fill="white" layoutX="23.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura" wrappingWidth="262.9999937862158" />
+    <Text fx:id="campoTexto2" fill="white" layoutX="23.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Humedad" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto3" fill="white" layoutX="23.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presion" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto4" fill="white" layoutX="23.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto5" fill="white" layoutX="23.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura Api" wrappingWidth="262.999999165535" />
+      <ImageView fx:id="ImagenTiempo" fitHeight="146.0" fitWidth="195.0" layoutX="47.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>
