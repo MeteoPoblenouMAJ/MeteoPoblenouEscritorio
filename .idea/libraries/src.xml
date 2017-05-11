@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="src">
+    <CLASSES />
+    <JAVADOC>
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/javadoc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/examples/account-info/src" />
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/examples/authorize/src" />
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/examples/upgrade-oauth1-token/src" />
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/examples/upload-file/src" />
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/examples/web-file-browser/src" />
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/src" />
+      <root url="file://$USER_HOME$/Baixades/dropbox-java-sdk-1.8.2/test" />
+    </SOURCES>
+  </library>
+</component>

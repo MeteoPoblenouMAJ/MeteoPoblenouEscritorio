@@ -1,4 +1,4 @@
-package sample;
+package sample.Api;
 
 import org.json.JSONArray;
 import org.json.JSONException;

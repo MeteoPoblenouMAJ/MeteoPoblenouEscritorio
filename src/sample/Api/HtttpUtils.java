@@ -1,4 +1,4 @@
-package sample;
+package sample.Api;
 
 import java.io.*;
 import java.net.HttpURLConnection;
