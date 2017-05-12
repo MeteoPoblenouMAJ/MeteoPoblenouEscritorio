@@ -14,9 +14,11 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("MeteoPoblenou");
         primaryStage.setScene(new Scene(root, 600, 500));
-        primaryStage.show();
-        Scene scene = new Scene(new Group(), 500, 400);
+        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(500);
+        Scene scene = new Scene(new Group(), 600, 500);
         scene.getStylesheets().add("src/style.css");
+        primaryStage.show();
     }
 
 

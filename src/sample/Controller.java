@@ -16,7 +16,6 @@ import java.util.GregorianCalendar;
 public class Controller {
 
     // Campos que actualizaremos en cada sección
-
     @FXML
     public Text campoTexto1;
     public Text campoTexto2;
@@ -91,7 +90,7 @@ public class Controller {
 
     }
 
-    //Comprueba  la id de la imagen y la cambia 
+    //Comprueba  la id de la imagen y la cambia
 
     private void CompruebaImagen() throws IOException {
         if(imagen.equals("03d")||imagen.equals("03n")){
@@ -170,7 +169,6 @@ public class Controller {
                 recojer.setDescripcion(tiempo);
                 recojer.setFecha(FechaControl);
 
-            System.out.println("temperatura-----" + temp + "---");
                 int mediaDia = Integer.parseInt(temp);
                 mediaTemp(mediaDia);
                 recojer.setMedia(media);
