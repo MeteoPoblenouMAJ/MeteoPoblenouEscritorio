@@ -106,7 +106,6 @@ public class Controller {
             temp = t.getTemperatura();
             hume = t.getHumedad();
             pre =  t.getPresion();
-            tiempo = s.getDescripcion();
             imagen = s.getImage();
                         }
 
@@ -129,6 +128,10 @@ public class Controller {
 
     public void UltDatos() throws IOException {
 
+        //La compruebo antes para saber el tiempo
+
+        CompruebaImagen();
+
         campoTexto1.setText("Tiempo: "+ tiempo);
         campoTexto2.setText("Humedad: " + hume);
         campoTexto3.setText("Presión: "+ pre);
@@ -141,9 +144,6 @@ public class Controller {
         campoTexto3.setVisible(true);
         campoTexto4.setVisible(true);
         campoTexto5.setVisible(true);
-
-        CompruebaImagen();
-
 
     }
 
@@ -314,41 +314,49 @@ public class Controller {
     private void lunanube() {
         Image image = new Image((getClass().getResourceAsStream("Imagen/nubeluna.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Nublado";
     }
 
     private void luna() {
         Image image = new Image((getClass().getResourceAsStream("Imagen/Luna.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Despejado";
     }
 
     private void tormenta() {
         Image image = new Image((getClass().getResourceAsStream("Imagen/rayos.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Tormenta";
     }
 
     private void lluvia() {
         Image image = new Image((getClass().getResourceAsStream("Imagen/lluvia.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Lluvias";
     }
 
     private void snow() {
         Image image = new Image((getClass().getResourceAsStream("Imagen/snow.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Nieva";
     }
 
     private void parsoleado() {
         Image image = new Image((getClass().getResourceAsStream("Imagen/parsol.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Parcialmente Nublado";
     }
 
     public void nublado() throws IOException {
         Image image = new Image((getClass().getResourceAsStream("Imagen/4-cloud-png-image-thumb.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Nublado";
     }
 
     public void soleado() throws IOException {
         Image image = new Image((getClass().getResourceAsStream("Imagen/sol.png")));
         ImagenTiempo.setImage(image);
+        tiempo = "Soleado";
     }
 
 
