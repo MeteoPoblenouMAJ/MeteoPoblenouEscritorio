@@ -18,30 +18,16 @@
                         <MenuItem mnemonicParsing="false" onAction="#ResuDiario" text="Resumen Diario" />
                     </items>
                 </Menu>
-            <Menu mnemonicParsing="false" text="Resumen Semana">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Observar Grafica" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Tiempo en Directo">
               <items>
-                <MenuItem mnemonicParsing="false" text="Ver cam" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Observar Graficas">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Mirar Grafica del dia anterior" />
-                <MenuItem mnemonicParsing="false" text="Mirar Grafica de la semana pasada" />
-                  <MenuItem mnemonicParsing="false" text="Mirar Grafica del mes pasado" />
+                <MenuItem mnemonicParsing="false" onAction="#Live" text="Ver cam" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
               <items>
-                <MenuItem mnemonicParsing="false" text="Sobre MeteoPoblenou" />
-                  <MenuItem mnemonicParsing="false" text="Apartado Dia de Hoy" />
-                  <MenuItem mnemonicParsing="false" text="Apartado Resumen Semana" />
-                  <MenuItem mnemonicParsing="false" text="Apartado Tiempo en Directo" />
-                  <MenuItem mnemonicParsing="false" text="Apartado Observar Graficas" />
+                <MenuItem mnemonicParsing="false" onAction="#Ayudainfo" text="Sobre MeteoPoblenou" />
+                  <MenuItem mnemonicParsing="false" onAction="#AyudaUlDatos" text="Apartado Dia de Hoy" />
+                  <MenuItem mnemonicParsing="false" onAction="#AyudaTiempoDirecto" text="Apartado Tiempo en Directo" />
               </items>
             </Menu>
             </menus>

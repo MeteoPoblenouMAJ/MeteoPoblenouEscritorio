@@ -18,6 +18,9 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="firebase_main" target="1.5" />
+      <module name="firebase_test" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
-

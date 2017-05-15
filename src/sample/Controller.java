@@ -1,10 +1,21 @@
 package sample;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import sample.Api.ApiTemps;
 import sample.Api.Temp;
 
@@ -12,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 public class Controller {
 
@@ -23,6 +35,7 @@ public class Controller {
     public Text campoTexto4;
     public Text campoTexto5;
     public ImageView ImagenTiempo;
+    public Pane pane;
 
 
     //Variables a rellenar
@@ -36,17 +49,56 @@ public class Controller {
     //Variables
     String FechaControl;
     public int media;
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    Firebase database = new Firebase("https://estaciometeo-73e65.firebaseio.com/");
+    //  DatabaseReference referencia;
 
 
 
+//Funcion que recoje todos los datos de la Api nada mas entrar
+    public void ultimos(){
+        Query lastQuery = database.getRef().getRoot();
+        System.out.println("ok"+lastQuery.getRef());
+        System.out.println("ok1"+database.getName());
+        System.out.println("ok2"+database.getRepo());
 
+        lastQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String hour = "";
+                double temp = 0.0;
+                double humidity = 0.0;
+                double press = 0.0;
+                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                while (iterator.hasNext()) {
+                    DataSnapshot dt = iterator.next();
+                    for (DataSnapshot test : dt.getChildren()) {
+                        //Hora de la actualitzacio
+                        hour = test.getName();
+                        //Temperatura de la ultima actualitzacio
+                        temp = test.child("TEMPERATURA").getValue(Double.class);
+                        humidity = test.child("HUMIDITY").getValue(Double.class);
+                        press = test.child("PRESSURE").getValue(Double.class);
+                    }
+                }
+                System.out.println(hour+" --> TEMPERATURA: "+temp);
+                System.out.println(hour+" --> HUMIDITY: "+humidity);
+                System.out.println(hour+" --> PRESSURE: "+press);
+            }
 
-    
+            @Override
+            public void onCancelled() {
 
+            }
+        });
+
+    }
 
     //Lo que hara al inicarse
     public void initialize() {
 
+        ultimos();
         Temp t = ApiTemps.getCardsTypes();
         Temp s = ApiTemps.getWeather();
 
@@ -95,7 +147,59 @@ public class Controller {
 
     }
 
-    //Comprueba  la id de la imagen y la cambia
+    //Cam en Directo
+
+    public void Live(ActionEvent actionEvent){
+        Scene scene = new Scene(new Group());
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        Hyperlink hpl = new Hyperlink("http://motion:arriquitan@virtual.ecaib.org/motion");
+        webEngine.load("http://motion:arriquitan@virtual.ecaib.org/motion");
+        pane.getChildren().addAll(hpl,browser);
+        scene.setRoot(pane);
+    }
+
+
+
+    //Ayudas
+
+    public void AyudaUlDatos(ActionEvent actionEvent){
+        alert.setTitle("Sobre Dia de hoy");
+        alert.setHeaderText("MeteoPoblenou  v0.1");
+        alert.setContentText("" +
+                "\n Tiempo Actua: Aqui puedes observar el tiempo real de tu ciudad Poblenou.  " +
+                "\n Resumen Diario: Aqui muestra la media de la temperatura del dia de hoy" +
+                "\n               " +
+                "\n               ");
+
+        alert.showAndWait();
+    }
+
+
+
+    public void AyudaTiempoDirecto(ActionEvent actionEvent){
+        alert.setTitle("Tiempo en directo");
+        alert.setHeaderText("MeteoPoblenou  v0.1");
+        alert.setContentText("" +"\n Observa la cam en tiempo real") ;
+
+        alert.showAndWait();
+    }
+
+    public void Ayudainfo(ActionEvent actionEvent){
+        alert.setTitle("METEO POBLENOU");
+        alert.setHeaderText("MeteoPoblenou  v0.1");
+        alert.setContentText("Estas en Meteo Poblenou una aplicación desarrollada por :" +
+                "\n Mireia Fernández Casals, Adonis Gomez Correia, Josep Rabada Colls" +
+                "\n Creada para la obtención de datos metereologicós para uso escolar." +
+                "\n               " +
+                "\n               ");
+
+        alert.showAndWait();
+    }
+
+
+
+    //Comprueba public void UltimosDatos(ActionEvent actionEvent) la id de la imagen y la cambia
 
     private void CompruebaImagen() throws IOException {
         if(imagen.equals("03d")||imagen.equals("03n")){

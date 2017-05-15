@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="rxjavafx-2.0.2" level="project" />
     <orderEntry type="library" name="src" level="project" />
+    <orderEntry type="library" name="com.firebase.client:firebase-client-jvm:1.0.7" level="project" />
   </component>
 </module>
