@@ -14,6 +14,7 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Dia de hoy">
                     <items>
+                  <MenuItem mnemonicParsing="false" onAction="#Graficas" text="Graficas" />
                         <MenuItem mnemonicParsing="false" onAction="#UltimosDatos" text="Tiempo Actual" />
                         <MenuItem mnemonicParsing="false" onAction="#ResuDiario" text="Resumen Diario" />
                     </items>

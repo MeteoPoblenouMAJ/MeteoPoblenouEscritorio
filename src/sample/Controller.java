@@ -159,6 +159,18 @@ public class Controller {
         scene.setRoot(pane);
     }
 
+    //Graficas
+
+    public void Graficas(ActionEvent actionEvent){
+        Scene scene = new Scene(new Group());
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        Hyperlink hpl = new Hyperlink("http://www.aemet.es/es/eltiempo/prediccion/municipios/grafica/temperatura/barcelona-id08019");
+        webEngine.load("http://www.aemet.es/es/eltiempo/prediccion/municipios/grafica/temperatura/barcelona-id08019");
+        pane.getChildren().addAll(hpl,browser);
+        scene.setRoot(pane);
+    }
+
 
 
     //Ayudas
