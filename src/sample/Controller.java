@@ -1,9 +1,10 @@
 package sample;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.ListFolderResult;
+import com.dropbox.core.v2.files.Metadata;
+import com.dropbox.core.v2.users.FullAccount;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -19,7 +20,13 @@ import javafx.scene.web.WebView;
 import sample.Api.ApiTemps;
 import sample.Api.Temp;
 
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.v2.DbxClientV2;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -37,6 +44,8 @@ public class Controller {
     public ImageView ImagenTiempo;
     public Pane pane;
 
+    //Datos fijos
+    private static final String ACCESS_TOKEN = "SEQdAW52eOAAAAAAAAAf5bL39MXW1b0MSoIfF2OXaImr0Yj4Mv37fNVH5MxeXriw";
 
     //Variables a rellenar
     public String temp;
@@ -51,54 +60,10 @@ public class Controller {
     public int media;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-    Firebase database = new Firebase("https://estaciometeo-73e65.firebaseio.com/");
-    //  DatabaseReference referencia;
-
-
-
-//Funcion que recoje todos los datos de la Api nada mas entrar
-    public void ultimos(){
-        Query lastQuery = database.getRef().getRoot();
-        System.out.println("ok"+lastQuery.getRef());
-        System.out.println("ok1"+database.getName());
-        System.out.println("ok2"+database.getRepo());
-
-        lastQuery.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String hour = "";
-                double temp = 0.0;
-                double humidity = 0.0;
-                double press = 0.0;
-                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
-                while (iterator.hasNext()) {
-                    DataSnapshot dt = iterator.next();
-                    for (DataSnapshot test : dt.getChildren()) {
-                        //Hora de la actualitzacio
-                        hour = test.getName();
-                        //Temperatura de la ultima actualitzacio
-                        temp = test.child("TEMPERATURA").getValue(Double.class);
-                        humidity = test.child("HUMIDITY").getValue(Double.class);
-                        press = test.child("PRESSURE").getValue(Double.class);
-                    }
-                }
-                System.out.println(hour+" --> TEMPERATURA: "+temp);
-                System.out.println(hour+" --> HUMIDITY: "+humidity);
-                System.out.println(hour+" --> PRESSURE: "+press);
-            }
-
-            @Override
-            public void onCancelled() {
-
-            }
-        });
-
-    }
 
     //Lo que hara al inicarse
-    public void initialize() {
-
-        ultimos();
+    public void initialize() throws DbxException, IOException {
+        //ultimos();
         Temp t = ApiTemps.getCardsTypes();
         Temp s = ApiTemps.getWeather();
 
@@ -114,13 +79,15 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
     //Meotodo que mostrara los ultimos datos recogidos
 
-    public void UltimosDatos(ActionEvent actionEvent){
+    public void UltimosDatos(ActionEvent actionEvent) throws DbxException, IOException {
         initialize();
+    }
+
+    public void UltimosDatosComparar(ActionEvent actionEvent) throws DbxException, IOException {
+        DatosDropbox();
     }
 
 
@@ -149,29 +116,17 @@ public class Controller {
 
     //Cam en Directo
 
-    public void Live(ActionEvent actionEvent){
+    public void Live(ActionEvent actionEvent) {
+
         Scene scene = new Scene(new Group());
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
         Hyperlink hpl = new Hyperlink("http://motion:arriquitan@virtual.ecaib.org/motion");
         webEngine.load("http://motion:arriquitan@virtual.ecaib.org/motion");
-        pane.getChildren().addAll(hpl,browser);
+        pane.getChildren().addAll(hpl, browser);
         scene.setRoot(pane);
+
     }
-
-    //Graficas
-
-    public void Graficas(ActionEvent actionEvent){
-        Scene scene = new Scene(new Group());
-        WebView browser = new WebView();
-        WebEngine webEngine = browser.getEngine();
-        Hyperlink hpl = new Hyperlink("http://www.aemet.es/es/eltiempo/prediccion/municipios/grafica/temperatura/barcelona-id08019");
-        webEngine.load("http://www.aemet.es/es/eltiempo/prediccion/municipios/grafica/temperatura/barcelona-id08019");
-        pane.getChildren().addAll(hpl,browser);
-        scene.setRoot(pane);
-    }
-
-
 
     //Ayudas
 
@@ -241,10 +196,36 @@ public class Controller {
 
     }
 
+    //Método que lee en Dropbox los ultimos datos de la raspberry subidos
+
+    public void DatosDropbox() throws DbxException, IOException {
+        DbxRequestConfig config = new DbxRequestConfig("dropbox/java");
+        DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+        FullAccount account = client.users().getCurrentAccount();
+        System.out.println(account.getName().getDisplayName());
+
+        ListFolderResult result = client.files().listFolder("/Textos");
+        while (true) {
+            for (Metadata metadata : result.getEntries()) {
+                //System.out.println(metadata.getPathLower());
+                if (!result.getHasMore()) {
+                    OutputStream downloadFile = new FileOutputStream("ultimosDatos.txt");
+                    FileMetadata fmetadata = client.files().downloadBuilder(metadata.getPathLower()).download(downloadFile);
+                    downloadFile.close();
+                }
+            }
+            if (!result.getHasMore()) {
+                break;
+            }
+
+            result = client.files().listFolderContinue(result.getCursor());
+        }
+    }
+
 
     //Pestaña Resumen dia
 
-    public void ResuDiario() throws IOException{
+    public void ResuDiario() throws IOException, DbxException {
 
         initialize();
         Calendar calendario = new GregorianCalendar();

@@ -62,7 +62,7 @@ public class ApiTemps {
                 object = jsonweather.getJSONObject(i);
                     temp.setDescripcion(object.getString("description"));
                 temp.setImage(object.getString("icon"));
-                //temp.setImage("13d");// para probar
+                //temp.setImage("04n");// para probar
 
             }
 
