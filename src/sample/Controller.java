@@ -22,11 +22,9 @@ import sample.Api.Temp;
 
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
+import sample.DropBox.leerXml;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -41,6 +39,9 @@ public class Controller {
     public Text campoTexto3;
     public Text campoTexto4;
     public Text campoTexto5;
+    public Text campoTexto6;
+    public Text campoTexto7;
+    public Text campoTexto8;
     public ImageView ImagenTiempo;
     public Pane pane;
 
@@ -56,10 +57,14 @@ public class Controller {
     public ArrayList<Temp> tempsResum = new ArrayList<Temp>();;
 
     //Variables
-    String FechaControl;
+    private String FechaControl;
     public int media;
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private File f = new File("/home/53638138e/IdeaProjects/ProyectoEstacion/ultimosDatos.txt");
+    private leerXml le = new leerXml();
 
+
+    //INICIO
 
     //Lo que hara al inicarse
     public void initialize() throws DbxException, IOException {
@@ -72,7 +77,7 @@ public class Controller {
             hume = t.getHumedad();
             pre =  t.getPresion();
             imagen = s.getImage();
-                        }
+        }
 
         try {
             UltDatos();
@@ -80,39 +85,23 @@ public class Controller {
             e.printStackTrace();
         }
     }
-    //Meotodo que mostrara los ultimos datos recogidos
 
+
+
+    //OPCIONES DEL MENU
+
+    //Meotodo que mostrara los ultimos datos recogidos
     public void UltimosDatos(ActionEvent actionEvent) throws DbxException, IOException {
         initialize();
     }
 
-    public void UltimosDatosComparar(ActionEvent actionEvent) throws DbxException, IOException {
+    //Metodo para cargar del drop box
+    public void UltimosDatosComparar(ActionEvent actionEvent) throws IOException, DbxException {
+        campoTexto8.setVisible(true);
+
         DatosDropbox();
     }
 
-
-    //Pestaña de Ultimos Datos
-
-    public void UltDatos() throws IOException {
-
-        //La compruebo antes para saber el tiempo
-
-        CompruebaImagen();
-
-        campoTexto1.setText("Tiempo: "+ tiempo);
-        campoTexto2.setText("Humedad: " + hume);
-        campoTexto3.setText("Presión: "+ pre);
-        campoTexto4.setText("Temperatura Raspberry: " +"......");
-        campoTexto5.setText("Temperatura Api: "+temp);
-
-        //Muetro los textos
-        campoTexto1.setVisible(true);
-        campoTexto2.setVisible(true);
-        campoTexto3.setVisible(true);
-        campoTexto4.setVisible(true);
-        campoTexto5.setVisible(true);
-
-    }
 
     //Cam en Directo
 
@@ -128,43 +117,34 @@ public class Controller {
 
     }
 
-    //Ayudas
 
-    public void AyudaUlDatos(ActionEvent actionEvent){
-        alert.setTitle("Sobre Dia de hoy");
-        alert.setHeaderText("MeteoPoblenou  v0.1");
-        alert.setContentText("" +
-                "\n Tiempo Actua: Aqui puedes observar el tiempo real de tu ciudad Poblenou.  " +
-                "\n Resumen Diario: Aqui muestra la media de la temperatura del dia de hoy" +
-                "\n               " +
-                "\n               ");
+    //METODOS QUE MUESTRAN Y ESCONDEN DATOS
 
-        alert.showAndWait();
+
+    //Pestaña de Ultimos Datos
+
+    public void UltDatos() throws IOException {
+
+        //La compruebo antes para saber el tiempo
+
+        CompruebaImagen();
+
+        campoTexto1.setText("Tiempo: "+ tiempo);
+        campoTexto2.setText("Humedad: " + hume);
+        campoTexto3.setText("Presión: "+ pre);
+        campoTexto4.setText("Temperatura Api:  " +temp);
+
+        //Muetro los textos
+        campoTexto1.setVisible(true);
+        campoTexto2.setVisible(true);
+        campoTexto3.setVisible(true);
+        campoTexto4.setVisible(true);
+
+
+        campoTexto5.setVisible(false);
+        campoTexto6.setVisible(false);
+        campoTexto7.setVisible(false);
     }
-
-
-
-    public void AyudaTiempoDirecto(ActionEvent actionEvent){
-        alert.setTitle("Tiempo en directo");
-        alert.setHeaderText("MeteoPoblenou  v0.1");
-        alert.setContentText("" +"\n Observa la cam en tiempo real") ;
-
-        alert.showAndWait();
-    }
-
-    public void Ayudainfo(ActionEvent actionEvent){
-        alert.setTitle("METEO POBLENOU");
-        alert.setHeaderText("MeteoPoblenou  v0.1");
-        alert.setContentText("Estas en Meteo Poblenou una aplicación desarrollada por :" +
-                "\n Mireia Fernández Casals, Adonis Gomez Correia, Josep Rabada Colls" +
-                "\n Creada para la obtención de datos metereologicós para uso escolar." +
-                "\n               " +
-                "\n               ");
-
-        alert.showAndWait();
-    }
-
-
 
     //Comprueba public void UltimosDatos(ActionEvent actionEvent) la id de la imagen y la cambia
 
@@ -196,9 +176,28 @@ public class Controller {
 
     }
 
+
+    public void UltDatosDropAsigna() throws IOException {
+
+        campoTexto5.setText("Temperatura Rasp: "+le.llegir(f).getTemperatura());
+        campoTexto6.setText("Humedad Rasp: "+le.llegir(f).getHumedad());
+        campoTexto7.setText("Presión Rasp: "+le.llegir(f).getPresion());
+
+        campoTexto5.setVisible(true);
+        campoTexto6.setVisible(true);
+        campoTexto7.setVisible(true);
+        campoTexto8.setVisible(false);
+
+    }
+
+
+    //METODOS SECUNDARIOS QUE SE ENCARGAN DE LA LOGICA DEL PROGRAMA
+
+
     //Método que lee en Dropbox los ultimos datos de la raspberry subidos
 
     public void DatosDropbox() throws DbxException, IOException {
+        //Bajamos los datos del drop box
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
         FullAccount account = client.users().getCurrentAccount();
@@ -220,8 +219,11 @@ public class Controller {
 
             result = client.files().listFolderContinue(result.getCursor());
         }
-    }
 
+        //Asignamos los datos a los de el dropbox
+        UltDatosDropAsigna();
+
+    }
 
     //Pestaña Resumen dia
 
@@ -302,6 +304,45 @@ public class Controller {
         }
     }
 
+
+
+    //AYUDAS
+
+    public void AyudaUlDatos(ActionEvent actionEvent){
+        alert.setTitle("Sobre Dia de hoy");
+        alert.setHeaderText("MeteoPoblenou  v0.1");
+        alert.setContentText("" +
+                "\n Tiempo Actua: Aqui puedes observar el tiempo real de tu ciudad Poblenou.  " +
+                "\n Resumen Diario: Aqui muestra la media de la temperatura del dia de hoy" +
+                "\n               " +
+                "\n               ");
+
+        alert.showAndWait();
+    }
+
+    public void AyudaTiempoDirecto(ActionEvent actionEvent){
+        alert.setTitle("Tiempo en directo");
+        alert.setHeaderText("MeteoPoblenou  v0.1");
+        alert.setContentText("" +"\n Observa la cam en tiempo real") ;
+
+        alert.showAndWait();
+    }
+
+    public void Ayudainfo(ActionEvent actionEvent){
+        alert.setTitle("METEO POBLENOU");
+        alert.setHeaderText("MeteoPoblenou  v0.1");
+        alert.setContentText("Estas en Meteo Poblenou una aplicación desarrollada por :" +
+                "\n Mireia Fernández Casals, Adonis Gomez Correia, Josep Rabada Colls" +
+                "\n Creada para la obtención de datos metereologicós para uso escolar." +
+                "\n               " +
+                "\n               ");
+
+        alert.showAndWait();
+    }
+
+
+
+
     //Configuracion de Imagenes segun el tiempo
 
     private void lunanube() {
@@ -351,7 +392,6 @@ public class Controller {
         ImagenTiempo.setImage(image);
         tiempo = "Soleado";
     }
-
 
 
 

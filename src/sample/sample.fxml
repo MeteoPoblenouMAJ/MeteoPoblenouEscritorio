@@ -39,14 +39,15 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-    <Text fx:id="campoTexto2" fill="white" layoutX="23.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Humedad" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto3" fill="white" layoutX="23.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presion" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto4" fill="white" layoutX="23.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto5" fill="white" layoutX="23.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura Api" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto6" fill="white" layoutX="23.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Humedad Api" wrappingWidth="262.999999165535" />
-    <Text fx:id="campoTexto7" fill="white" layoutX="23.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presión Api" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto2" fill="white" layoutX="23.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Humedad" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto3" fill="white" layoutX="23.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presion" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto4" fill="white" layoutX="23.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura" wrappingWidth="262.999999165535" />
+    <Text fx:id="campoTexto5" fill="white" layoutX="23.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperatura Api" wrappingWidth="367.9999954998493" />
+    <Text fx:id="campoTexto6" fill="white" layoutX="23.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Humedad Api" wrappingWidth="367.9999954998493" />
+    <Text fx:id="campoTexto7" fill="white" layoutX="23.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presión Api" wrappingWidth="367.999999165535" />
+    <Text fx:id="campoTexto8" fill="white" layoutX="70.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargando...." wrappingWidth="367.999999165535" visible="false"/>
 
-      <ImageView fx:id="ImagenTiempo" fitHeight="162.0" fitWidth="193.0" layoutX="23.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="ImagenTiempo" fitHeight="154.0" fitWidth="177.0" layoutX="23.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="399.0" layoutY="88.0" mnemonicParsing="false" onAction="#UltimosDatos" prefHeight="26.0" prefWidth="78.0" text="Recarga" />
     </children>
 </AnchorPane>
