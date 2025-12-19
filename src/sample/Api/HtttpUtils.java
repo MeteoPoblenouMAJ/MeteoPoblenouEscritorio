@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by 53638138e on 09/05/17.
+ * Created by ------- on 09/05/17.
  */
 //Clase que sirve para conectar con la appi
 public class HtttpUtils {
