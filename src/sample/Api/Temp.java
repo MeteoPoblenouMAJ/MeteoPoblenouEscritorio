@@ -3,7 +3,7 @@ package sample.Api;
 import java.io.Serializable;
 
 /**
- * Created by 53638138e on 08/05/17.
+ * Created by ------------ on 08/05/17.
  */
 public class Temp implements Serializable {
 
