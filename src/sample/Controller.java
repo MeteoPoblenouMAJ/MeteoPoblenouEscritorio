@@ -46,7 +46,7 @@ public class Controller {
     public Pane pane;
 
     //Datos fijos
-    private static final String ACCESS_TOKEN = "SEQdAW52eOAAAAAAAAAf5bL39MXW1b0MSoIfF2OXaImr0Yj4Mv37fNVH5MxeXriw";
+    private static final String ACCESS_TOKEN = "----------------------------------------------------------";
 
     //Variables a rellenar
     public String temp;
